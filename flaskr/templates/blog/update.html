@@ -1,0 +1,14 @@
+﻿{% extends 'base.html' %}
+{% block header %}<h1 class="h3 mb-4">{% block title %}Editar "{{ post.title }}"{% endblock %}</h1>{% endblock %}
+{% block content %}
+  <div class="card shadow-sm mb-3"><div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+      <div class="mb-3"><label for="title" class="form-label">Título</label><input name="title" id="title" class="form-control" value="{{ request.form['title'] or post.title }}" required></div>
+      <div class="mb-3"><label for="imagem_post" class="form-label">Alterar Imagem do Post</label><input type="file" name="imagem_post" id="imagem_post" class="form-control" accept="image/*"></div>
+      <div class="mb-3"><label for="body" class="form-label">Conteúdo</label><textarea name="body" id="body" rows="5" class="form-control">{{ request.form['body'] or post.body }}</textarea></div>
+      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+      <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div></div>
+  <form action="{{ url_for('blog.delete', id=post.id) }}" method="post"><button class="btn btn-danger" type="submit">Excluir Post</button></form>
+{% endblock %}
